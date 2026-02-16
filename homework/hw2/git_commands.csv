@@ -1,0 +1,9 @@
+Command,Description
+"git add <filename>","Stage all changes or specific file <filename> for the next commit."
+"git rm --cached <filename>","Unstage file <filename> while retaining the changes in the working directory."
+"git commit -m <commit message>","Commit changes to the repository with a descriptive message <commit message>."
+"git push","Upload your commits to the remote repository."
+"git stash","Temporarily shelves changes in your working directory so you can work on a different task."
+"git stash push -m <stash message>","Stashes changes with a custom message <stash message> for easy identification."
+"git stash apply","Applies the most recently stashed changes."
+"git stash apply <stash-name>","Applies the stashed changes with the specified name <stash-name>."

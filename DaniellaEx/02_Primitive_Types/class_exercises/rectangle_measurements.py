@@ -1,0 +1,7 @@
+width = float(input("Enter the width of the rectangle:"))
+Height = float(input("Enter the Height of the rectangle:"))
+print("width:", width)
+print("Height:", Height)
+print(f"Area :{width * Height}")
+print(f"Perimeter :{2*(width + Height)}")
+print(f"Diagonal;{((width**2 + Height**2))**0.5}")

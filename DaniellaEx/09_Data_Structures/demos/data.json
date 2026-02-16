@@ -1,0 +1,18 @@
+{
+    "name": "Data Structures",
+    "description": "In this module, we will explore various data structures such as arrays, linked lists, stacks, queues, trees, and graphs. We will learn how to implement these data structures in code and understand their applications in solving real-world problems.",
+    "topics": [
+        "Arrays",
+        "Linked Lists",
+        "Stacks",
+        "Queues",
+        "Trees",
+        "Graphs"
+    ],
+    "demos": [
+        {
+            "title": "Implementing a Linked List in Python",
+            "description": "In this demo, we will implement a simple linked list data structure in Python. We will create a Node class and a LinkedList class to manage the nodes."
+        }
+    ]
+}
