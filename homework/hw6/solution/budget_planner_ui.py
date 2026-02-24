@@ -11,18 +11,18 @@ LINE_LENGTH = 40
 SEPARATOR_LINE = "=" * LINE_LENGTH
 
 
-def check_description(prompt: str) -> str:
+def check_description(user_input: str) -> str:
     while True:
-        value = input(prompt)
+        value = input(user_input)
         if value == "":
             print("description cannot be empty.")
             continue
         return value
 
 
-def check_amount(prompt: str) -> float:
+def check_amount(user_input: str) -> float:
     while True:
-        value = input(prompt)
+        value = input(user_input)
         if value == "":
             print("amount cannot be empty.")
             continue
@@ -49,14 +49,6 @@ def request_json(method: str, path: str) -> Any | None:
     except ValueError:
         print("Invalid response from API")
         return None
-
-    if isinstance(data, dict) and ERROR_KEY in data:
-        error_value = data.get(ERROR_KEY)
-        print(
-            error_value if isinstance(error_value, str) else "Invalid response from API"
-        )
-        return None
-
     return data
 
 
@@ -73,7 +65,7 @@ def request_and_print(
         return None
 
     print(success_message)
-    return data if isinstance(data, dict) else None
+    return data
 
 
 class BudgetUI:

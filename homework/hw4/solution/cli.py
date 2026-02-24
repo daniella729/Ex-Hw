@@ -4,18 +4,18 @@ LINE_LENGTH = 40
 SEPARATOR_LINE = "=" * LINE_LENGTH
 
 
-def check_description(prompt: str) -> str:
+def check_description(user_input: str) -> str:
     while True:
-        value = input(prompt)
+        value = input(user_input)
         if value == "":
             print("description cannot be empty.")
             continue
         return value
 
 
-def check_amount(prompt: str) -> float:
+def check_amount(user_input: str) -> float:
     while True:
-        value = input(prompt)
+        value = input(user_input)
         if value == "":
             print("amount cannot be empty.")
             continue

@@ -11,14 +11,11 @@ from solution.budget import (
 SALARY = "Salary"
 
 
-@pytest.fixture()
-def planner() -> BudgetPlanner:
+def test_get_summary_calculates_totals() -> None:
     repository = TransactionRepository()
     calculator = SummaryCalculator()
-    return BudgetPlanner(repository, calculator)
+    planner = BudgetPlanner(repository, calculator)
 
-
-def test_get_summary_calculates_totals(planner: BudgetPlanner) -> None:
     planner.add_income(SALARY, 5000)
     planner.add_income("Freelance", 1500)
     planner.add_expense("Rent", 1500)
@@ -34,7 +31,11 @@ def test_get_summary_calculates_totals(planner: BudgetPlanner) -> None:
     assert summary["expenses"] == [Expense("Rent", 1500), Expense("Groceries", 400)]
 
 
-def test_clear_all_removes_all_data(planner: BudgetPlanner) -> None:
+def test_clear_all_removes_all_data() -> None:
+    repository = TransactionRepository()
+    calculator = SummaryCalculator()
+    planner = BudgetPlanner(repository, calculator)
+
     planner.add_income(SALARY, 5000)
     planner.add_expense("Groceries", 1500)
 
