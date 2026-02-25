@@ -48,9 +48,6 @@ async def fetch_shipping_options(zip_code: str) -> list[dict[str, Any]]:
     ]
 
 
-process_pool = ProcessPoolExecutor()
-
-
 @app.get("/process_order")
 async def process_order(user_id: int, product_id: int, zip_code: str) -> dict:
     """
@@ -60,20 +57,19 @@ async def process_order(user_id: int, product_id: int, zip_code: str) -> dict:
     3. Fetching shipping options
     4. Calculating shipping discount (CPU-intensive)
     """
-    loop = asyncio.get_running_loop()
-    user_task = fetch_user_data(user_id)
-    inventory_task = fetch_inventory_data(product_id)
-    shipping_task = fetch_shipping_options(zip_code)
-    discount_factor = loop.run_in_executor(
-        process_pool, calculate_fibonacci, FIBONACCI_INDEX
-    )
+
     user, inventory, shipping = await asyncio.gather(
-        user_task,
-        inventory_task,
-        shipping_task,
+        fetch_user_data(user_id),
+        fetch_inventory_data(product_id),
+        fetch_shipping_options(zip_code),
     )
-    discount_future = discount_factor
-    discount_value = (await discount_future) % 10
+
+    loop = asyncio._get_running_loop()
+    with ProcessPoolExecutor() as executor:
+        result = await loop.run_in_executor(
+            executor, calculate_fibonacci, FIBONACCI_INDEX
+        )
+        discount_value = result % 10
     await asyncio.sleep(PAYMENT_PROCESSING_DELAY)  # Simulate payment processing
 
     return {

@@ -3,27 +3,19 @@
 ### Original Version (`app.py`)
 - Total test duration: **33.00 seconds**
 - Average response time: **18.249 seconds**
-- Throughput: **0.61 requests/second**
+- Requessts per second: **0.61**
 
 ### Optimized Version (`app_optimized.py`)
-- Total test duration: **4.13 seconds**
-- Average response time: **3.936 seconds**
-- Throughput: **4.84 requests/second**
+- Total test duration: **6.12 seconds**
+- Average response time: **5.937 seconds**
+- Requessts per second: **3.27**
 
 ---
 
-## Performance Improvements
+## Improvement:
 
-- **Response time reduced by 78.4%**
-- **Throughput increased by 7.9×** (≈693% increase)
+- **Response time: 67.5% faster**
+- **Throughput :5.36× more requests per second** 
 
 ---
 
-### Summary
-
-The optimized version significantly improves performance by:
-- Running independent I/O operations concurrently using `asyncio.gather()`
-- Offloading CPU-bound Fibonacci calculations to a `ProcessPoolExecutor`
-- Eliminating blocking calls that previously stalled the event loop
-
-Under higher concurrency, the performance gap becomes even more dramatic due to improved parallelism and reduced blocking behavior.

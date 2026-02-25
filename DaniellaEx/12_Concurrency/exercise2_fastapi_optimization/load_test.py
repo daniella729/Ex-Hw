@@ -33,9 +33,9 @@ def run_load_test(url: str, description: str) -> None:
     def worker() -> None:
         try:
             time_taken = make_request(url)
+            times.append(time_taken)
         except Exception as error:
             print(f"Request failed: {error}")
-        times.append(time_taken)
 
     print(f"\nTesting {description}...")
     start_time = time.time()

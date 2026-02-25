@@ -23,7 +23,7 @@ async def make_request(session: aiohttp.ClientSession, url: str) -> float:
     async with session.get(url) as response:
         response.raise_for_status()
     duration = time.time() - start_time
-    print(f"Task {request_id} finished in {duration:.3f}s")
+    print(f"request {request_id} time taken: {duration:.3f}s")
     return duration
 
 
@@ -31,21 +31,28 @@ async def run_load_test(url: str, description: str) -> None:
     """Run load test against specified URL and print results."""
     times: List[float] = []
 
+    async def worker(session: aiohttp.ClientSession) -> None:
+        try:
+            time_taken = await make_request(session, url)
+        except Exception as error:
+            print(f"Request failed: {error}")
+        times.append(time_taken)
+
     print(f"\nTesting {description}...")
     start_time = time.time()
     async with aiohttp.ClientSession() as session:
-        tasks = [make_request(session, url) for _ in range(NUM_REQUESTS)]
-        times = await asyncio.gather(*tasks)
+        tasks = [worker(session) for _ in range(NUM_REQUESTS)]
+        await asyncio.gather(*tasks)
 
     total_time = time.time() - start_time
-
+    requests_per_second = NUM_REQUESTS / total_time
     print(f"Results for {description}:")
     print(f"Total time: {total_time:.2f} seconds")
     print(f"Average request time: {statistics.mean(times):.3f} seconds")
     print(f"Median request time: {statistics.median(times):.3f} seconds")
     print(f"Max request time: {max(times):.3f} seconds")
     print(f"Min request time: {min(times):.3f} seconds")
-    print(f"Requests per second: {NUM_REQUESTS/total_time:.2f}")
+    print(f"Requests per second: {requests_per_second:.2f}")
 
 
 async def main() -> None:
