@@ -1,0 +1,3 @@
+id,name,opening_balance,currency,is_deleted
+1,daniella,1000,ILS,True
+2,sara,100,ILS,False

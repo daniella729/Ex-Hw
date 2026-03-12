@@ -1,0 +1,2 @@
+id,description,amount,transfer_date,created_at,from_account_id,to_account_id,is_deleted
+1,move,10,2026-03-12,2026-03-12,1,2,False
