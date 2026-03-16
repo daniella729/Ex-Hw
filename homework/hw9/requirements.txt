@@ -1,0 +1,12 @@
+black
+flake8
+wemake-python-styleguide
+mypy
+fastapi 
+uvicorn
+requests
+pytest
+alembic
+SQLAlchemy
+aiomysql
+python-dotenv
